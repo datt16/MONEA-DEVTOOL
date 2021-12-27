@@ -1,28 +1,35 @@
 package io.github.datt16.monea_devtool
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import io.github.datt16.monea_devtool.databinding.TextRowItemBinding
 
-class MainAdapter(private val dataSet: List<Record>) :
+class MainAdapter(context: Context, private val dataSet: List<Record>) :
     RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.tv_item_model)
-        val co2Tv: TextView = view.findViewById(R.id.tv_co2)
-        val tempTv: TextView = view.findViewById(R.id.tv_temp)
-        val humidTv: TextView = view.findViewById(R.id.tv_humid)
-        val pressureTv: TextView = view.findViewById(R.id.tv_pressure)
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+
+    class MyViewHolder(binding: TextRowItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val textView: TextView = binding.tvItemModel
+        val co2Tv: TextView = binding.tvCo2
+        val tempTv: TextView = binding.tvTemp
+        val humidTv: TextView = binding.tvHumid
+        val pressureTv: TextView = binding.tvPressure
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.text_row_item, parent, false)
 
-        return MyViewHolder(view)
+        val binding: TextRowItemBinding =
+            TextRowItemBinding.inflate(layoutInflater, parent, false)
+
+        return MyViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.textView.text = dataSet[position].memo

@@ -13,11 +13,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.core.Context
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import io.github.datt16.monea_devtool.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
+
     var recyclerview: RecyclerView? = null
     var fab: FloatingActionButton? = null
     var records: Records = Records()
@@ -28,36 +33,34 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        setup()
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        context?.let { setup(it) }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fab = view.findViewById(R.id.mainFab)
+        fab = binding.mainFab
         fab?.setOnClickListener {
             findNavController().navigate(R.id.action_add_record)
         }
 
-        recyclerview = view.findViewById(R.id.container_recycler_view)
+        recyclerview = binding.containerRecyclerView
         this.recyclerview?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = MainAdapter(records.getAllRecords())
-
+            adapter = MainAdapter(context, records.getAllRecords())
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         this.fab = null
-        this.recyclerview?.adapter = null
-        this.recyclerview = null
+        this.binding.containerRecyclerView.adapter = null
     }
 
-    private fun setup() {
+    private fun setup(context: android.content.Context) {
         records.resetData()
         val database = Firebase.database
         val myRef = database.getReference("v1/records/sensorId/HANDSON/records/")
@@ -74,7 +77,8 @@ class MainFragment : Fragment() {
                         store.setNewSensor(records.getSensorId(), records.getAllRecords())
                         Log.d("Fire", records.getAllRecords().toString())
 
-                        recyclerview?.adapter = MainAdapter(records.getAllRecords())
+                        binding.containerRecyclerView.adapter =
+                            MainAdapter(context, records.getAllRecords())
                     }
                     store.debug()
                 }

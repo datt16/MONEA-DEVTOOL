@@ -23,10 +23,6 @@ import java.time.ZoneId
 class AddRecordFragment : Fragment() {
 
     var id = ""
-    var co2 = 0
-    var humid = 0
-    var temp = 0
-    var pressure = 0
 
     private var _binding: FragmentAddRecordBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +32,7 @@ class AddRecordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddRecordBinding.inflate(inflater, container, false)
 
         val submitBtn = binding.submitBtn
@@ -53,42 +49,41 @@ class AddRecordFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        var _binding: FragmentAddRecordBinding? = null
     }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun validate() {
-        var _co2 = binding.co2Et.text.toString().trim()
-        var _humid = binding.humidEt.text.toString().trim()
-        var _temp = binding.tempEt.text.toString().trim()
-        var _pressure = binding.pressureEt.text.toString().trim()
+        val co2 = binding.co2Et.text.toString().trim()
+        val humid = binding.humidEt.text.toString().trim()
+        val temp = binding.tempEt.text.toString().trim()
+        val pressure = binding.pressureEt.text.toString().trim()
         id = binding.idEt.text.toString().trim()
 
         Log.d("ADD_RDB", "================= OK")
         if (TextUtils.isEmpty(id)) {
             binding.idTil.error = "idを入力してください"
-        } else if (TextUtils.isEmpty(_co2)) {
+        } else if (TextUtils.isEmpty(co2)) {
             binding.co2Til.error = "入力してください"
-        } else if (TextUtils.isEmpty(_humid)) {
+        } else if (TextUtils.isEmpty(humid)) {
             binding.humidTil.error = "入力してください"
-        } else if (TextUtils.isEmpty(_pressure)) {
+        } else if (TextUtils.isEmpty(pressure)) {
             binding.pressureTil.error = "入力してください"
-        } else if (TextUtils.isEmpty(_temp)) {
+        } else if (TextUtils.isEmpty(temp)) {
             binding.tempTil.error = "入力してください"
         } else {
             var created: Long = 0
 
-            var s = id.replace("_", "T")
-            val _s = LocalDateTime.parse(s)
-            created = _s.atZone(ZoneId.systemDefault()).toEpochSecond()
+            val s = id.replace("_", "T")
+            val S = LocalDateTime.parse(s)
+            created = S.atZone(ZoneId.systemDefault()).toEpochSecond()
 
             val record = Record(
-                _co2.toInt(),
+                co2.toInt(),
                 created.toInt(),
-                _humid.toInt(),
-                _pressure.toInt(),
-                _temp.toInt()
+                humid.toInt(),
+                pressure.toInt(),
+                temp.toInt()
             )
             addDataToRDB(id, record)
             findNavController().navigate(R.id.action_add_done)
@@ -99,7 +94,7 @@ class AddRecordFragment : Fragment() {
         Log.d("ADD_RDB", "OK")
         val db = Firebase.database
         val ref = db.getReference("v1/records/sensorId/HANDSON/records/")
-        ref.child(id).setValue(item).addOnSuccessListener { result ->
+        ref.child(id).setValue(item).addOnSuccessListener {
             val context: Activity? = activity
             if (context != null) {
                 AlertDialog.Builder(context) // FragmentではActivityを取得して生成
