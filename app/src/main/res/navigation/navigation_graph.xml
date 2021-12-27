@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="io.github.datt16.monea_devtool.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_add_record"
+            app:destination="@id/addRecordFragment"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/slide_to_top" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addRecordFragment"
+        android:name="io.github.datt16.monea_devtool.AddRecordFragment"
+        android:label="AddRecordFragment"
+        tools:layout="@layout/fragment_add_record">
+        <action
+            android:id="@+id/action_add_done"
+            app:destination="@+id/mainFragment"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/slide_to_top" />
+    </fragment>
+
+
+</navigation>

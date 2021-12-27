@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".AddRecordFragment">
+
+    <TextView
+        android:id="@+id/title_Tv"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="レコードの追加" />
+
+    <TextView
+        android:id="@+id/address_label_Tv"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_Tv"
+        android:text="追加先" />
+
+    <TextView
+        android:id="@+id/address_Tv"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_Tv"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/address_label_Tv"
+        android:text="v1/records/" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/id_Til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/co2_Til">
+
+        <EditText
+            android:id="@+id/id_Et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="id"
+            android:inputType="text"
+            android:text="2022-01-01_00:20" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/co2_Til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/temp_Til"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/co2_Et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="二酸化炭素濃度"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/temp_Til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/temp_Et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="気温"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/humid_Til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_Til"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/humid_Et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="湿度"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pressure_Til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/humid_Til"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/pressure_Et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="気圧"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="送信" />
+
+
+</RelativeLayout>
