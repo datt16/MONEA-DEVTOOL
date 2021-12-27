@@ -9,3 +9,7 @@ RDB = Firebase Realtime Database
 
 - RDB上のデータを取得する機能  
 → 現在は HANDSON下 のデータの参照ができる
+
+### 利用している技術
+- Firebase
+- ViewBinding
