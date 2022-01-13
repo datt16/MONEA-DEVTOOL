@@ -93,7 +93,6 @@ class AddRecordFragment : Fragment() {
     }
 
     private fun addDataToRDB(id: String, item: Record) {
-        Log.d("ADD_RDB", "OK")
         val db = Firebase.database
         val ref = db.getReference("v1/records/sensorId/HANDSON/records/")
         ref.child(id).setValue(item).addOnSuccessListener {
