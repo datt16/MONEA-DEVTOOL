@@ -1,4 +1,4 @@
-package io.github.datt16.monea_devtool
+package io.github.datt16.monea_devtool.ui
 
 import android.app.Activity
 import android.content.DialogInterface
@@ -16,6 +16,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import io.github.datt16.monea_devtool.R
+import io.github.datt16.monea_devtool.Record
 import io.github.datt16.monea_devtool.databinding.FragmentAddRecordBinding
 import java.time.LocalDateTime
 import java.time.ZoneId

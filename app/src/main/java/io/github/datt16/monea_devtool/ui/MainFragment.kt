@@ -1,4 +1,4 @@
-package io.github.datt16.monea_devtool
+package io.github.datt16.monea_devtool.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +23,10 @@ import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import io.github.datt16.monea_devtool.DataSet
+import io.github.datt16.monea_devtool.R
+import io.github.datt16.monea_devtool.Record
+import io.github.datt16.monea_devtool.Records
 import io.github.datt16.monea_devtool.data.RecordRepositoryImpl
 import io.github.datt16.monea_devtool.databinding.FragmentMainBinding
 import kotlinx.coroutines.flow.asStateFlow

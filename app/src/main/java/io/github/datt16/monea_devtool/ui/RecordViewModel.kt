@@ -1,7 +1,8 @@
-package io.github.datt16.monea_devtool
+package io.github.datt16.monea_devtool.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.github.datt16.monea_devtool.Record
 import io.github.datt16.monea_devtool.data.RealtimeDatabaseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect

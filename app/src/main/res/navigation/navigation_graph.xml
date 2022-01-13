@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="io.github.datt16.monea_devtool.MainFragment"
+        android:name="io.github.datt16.monea_devtool.ui.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/addRecordFragment"
-        android:name="io.github.datt16.monea_devtool.AddRecordFragment"
+        android:name="io.github.datt16.monea_devtool.ui.AddRecordFragment"
         android:label="AddRecordFragment"
         tools:layout="@layout/fragment_add_record">
         <action
