@@ -24,13 +24,6 @@ class DataSet {
     fun setNewSensor(sensorId: String, Records: List<Record>) {
         dataSets += sensorId to Records
     }
-
-    fun debug() {
-//        Log.d("DataSet",
-//            dataSets.map { entry -> "${entry.key} ----- ${entry.value.map { it.memo }}\n" }
-//                .toString()
-//        )
-    }
 }
 
 class Records {
