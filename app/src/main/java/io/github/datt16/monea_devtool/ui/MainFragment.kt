@@ -38,10 +38,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    var recyclerview: RecyclerView? = null
     var fab: FloatingActionButton? = null
-    var records: Records = Records()
-    var store = DataSet()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -130,9 +127,7 @@ private fun ListViewItemText(text: String) {
 class RecordViewModelFactory(private val recordRepository: RecordRepositoryImpl) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(RecordViewModel::class.java)) {
-            return RecordViewModel(recordRepository) as T
-        }
+        if (modelClass.isAssignableFrom(RecordViewModel::class.java)) return RecordViewModel(recordRepository) as T
 
         throw IllegalStateException()
     }

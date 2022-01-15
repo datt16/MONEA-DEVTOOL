@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import io.github.datt16.monea_devtool.R
 import io.github.datt16.monea_devtool.ui.theme.DevToolMaterialTheme
 
 class MainMenuFragment : Fragment() {
@@ -28,31 +30,35 @@ class MainMenuFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 DevToolMaterialTheme {
-                    MenuCard()
+                    MenuCard(nextPageId = R.id.action_mainMenuFragment_to_mainFragment)
                 }
             }
         }
     }
 
     @Composable
-    fun MenuCard() {
+    fun MenuCard(
+        title: String = "センサーの管理",
+        subTitle: String = "センサーの追加・削除、情報の更新が行えます",
+        nextPageId: Int = -1
+    ) {
         Card(
             modifier = Modifier
                 .padding(16.dp)
                 .wrapContentSize()
-                .clickable { Log.d("UI", "押された") },
+                .clickable { if (nextPageId > 0) findNavController().navigate(nextPageId) },
             elevation = 4.dp,
         ) {
             Row(modifier = Modifier.padding(12.dp)) {
                 Column(modifier = Modifier.fillMaxWidth())
                 {
                     Text(
-                        text = "センサーの管理",
+                        text = title,
                         style = MaterialTheme.typography.subtitle1,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "センサーの追加・削除、情報の更新が行えます。",
+                        text = subTitle,
                         style = MaterialTheme.typography.caption,
                         color = MaterialTheme.colors.onBackground
                     )
@@ -64,6 +70,9 @@ class MainMenuFragment : Fragment() {
     @Preview(showBackground = true, name = "Card Preview")
     @Composable
     fun PreviewFun() {
-        MenuCard()
+        MenuCard(
+            title = "センサーの管理",
+            subTitle = "センサーの追加・削除、情報の更新が行えます",
+        )
     }
 }

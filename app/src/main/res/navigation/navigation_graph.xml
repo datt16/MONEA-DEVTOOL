@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="io.github.datt16.monea_devtool.ui.MainMenuFragment"
-        android:label="MainMenuFragment" />
+        android:label="MainMenuFragment" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/mainFragment"
