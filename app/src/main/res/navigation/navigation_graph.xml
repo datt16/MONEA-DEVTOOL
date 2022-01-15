@@ -10,8 +10,11 @@
         android:name="io.github.datt16.monea_devtool.ui.MainMenuFragment"
         android:label="MainMenuFragment" >
         <action
-            android:id="@+id/action_mainMenuFragment_to_mainFragment"
+            android:id="@+id/action_main_to_records"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_MainMenu_to_SensorList"
+            app:destination="@id/sensorListFragment" />
     </fragment>
 
     <fragment
@@ -36,6 +39,18 @@
             app:destination="@+id/mainFragment"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/slide_to_top" />
+    </fragment>
+    <fragment
+        android:id="@+id/sensorUpdateFragment"
+        android:name="io.github.datt16.monea_devtool.ui.SensorUpdateFragment"
+        android:label="SensorUpdateFragment" />
+    <fragment
+        android:id="@+id/sensorListFragment"
+        android:name="io.github.datt16.monea_devtool.ui.SensorListFragment"
+        android:label="SensorListFragment" >
+        <action
+            android:id="@+id/action_SensorList_to_Update"
+            app:destination="@id/sensorUpdateFragment" />
     </fragment>
 
 

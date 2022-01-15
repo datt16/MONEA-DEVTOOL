@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,7 +21,7 @@ import androidx.navigation.fragment.findNavController
 import io.github.datt16.monea_devtool.R
 import io.github.datt16.monea_devtool.ui.theme.DevToolMaterialTheme
 
-class MainMenuFragment : Fragment() {
+class SensorListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,38 +30,48 @@ class MainMenuFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 DevToolMaterialTheme {
-                    MenuCard(nextPageId = R.id.action_MainMenu_to_SensorList)
+                    SensorItemCard()
                 }
             }
         }
     }
 
     @Composable
-    fun MenuCard(
-        title: String = "センサーの管理",
-        subTitle: String = "センサーの追加・削除、情報の更新が行えます",
-        nextPageId: Int = -1
+    fun SensorItemCard(
+        sensorName: String = "センサーの管理",
+        info1: String = "4J教室",
+        info2: String = "",
+        sensorId: String = "HANDSON"
     ) {
         Card(
             modifier = Modifier
                 .padding(16.dp)
                 .wrapContentSize()
-                .clickable { if (nextPageId > 0) findNavController().navigate(nextPageId) },
+                .clickable { findNavController().navigate(R.id.action_SensorList_to_Update) },
             elevation = 4.dp,
         ) {
             Row(modifier = Modifier.padding(12.dp)) {
                 Column(modifier = Modifier.fillMaxWidth())
                 {
                     Text(
-                        text = title,
+                        text = sensorName,
                         style = MaterialTheme.typography.subtitle1,
                         fontWeight = FontWeight.Bold
                     )
-                    Text(
-                        text = subTitle,
-                        style = MaterialTheme.typography.caption,
-                        color = MaterialTheme.colors.onBackground
-                    )
+                    Row {
+                        Text(
+                            text = info1,
+                            style = MaterialTheme.typography.caption,
+                            color = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = info2,
+                            style = MaterialTheme.typography.caption,
+                            color = Color.Gray
+                        )
+                    }
+
                 }
             }
         }
@@ -69,9 +80,9 @@ class MainMenuFragment : Fragment() {
     @Preview(showBackground = true, name = "Card Preview")
     @Composable
     fun PreviewFun() {
-        MenuCard(
-            title = "センサーの管理",
-            subTitle = "センサーの追加・削除、情報の更新が行えます",
+        SensorItemCard(
+            sensorName = "センサーの管理",
+            info1 = "4J教室",
         )
     }
 }
