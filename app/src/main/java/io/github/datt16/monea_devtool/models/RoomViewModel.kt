@@ -15,7 +15,7 @@ class RoomViewModel(private val _realtimeDatabaseRepository: RealtimeDatabaseRep
     //   StateFlow: 状態を保持しておけるFlow, 監視可能
     //   Flow: コルーチンの一種, 複数の値を順次に出力ができる(ストリーム)
     //   https://qiita.com/tonionagauzzi/items/12aa1a4400256cece72c
-    val recordsStateFlow = MutableStateFlow<List<RoomData>?>(null)
+    val roomDataStateFlow = MutableStateFlow<List<RoomData>?>(null)
 
     init {
         fetchData()
@@ -25,7 +25,7 @@ class RoomViewModel(private val _realtimeDatabaseRepository: RealtimeDatabaseRep
     private fun fetchData() {
         viewModelScope.launch {
             _realtimeDatabaseRepository.fetchData().collect {
-                recordsStateFlow.value = it.getOrNull()
+                roomDataStateFlow.value = it.getOrNull()
             }
         }
     }

@@ -40,10 +40,8 @@ class SensorDataRepositoryImpl constructor(
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("SensorData/Fetch", "data changed.")
-                val value =
-                    snapshot.getValue<Map<String, SensorData>>()
-                Log.d("SensorData/Fetch", value.toString())
+                Log.d("Repo[Sensor]", "remote data changed...")
+                val value = snapshot.getValue<Map<String, SensorData>>()
 
                 val sensors: MutableList<SensorData> = mutableListOf()
                 value?.map {

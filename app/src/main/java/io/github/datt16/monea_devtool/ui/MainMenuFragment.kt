@@ -29,7 +29,19 @@ class MainMenuFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 DevToolMaterialTheme {
-                    MenuCard(nextPageId = R.id.action_MainMenu_to_SensorList)
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        MenuCard(
+                            title = "センサーの管理",
+                            subTitle = "センサーの追加・削除、情報の更新が行えます",
+                            nextPageId = R.id.action_MainMenu_to_SensorList
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        MenuCard(
+                            title = "部屋の管理",
+                            subTitle = "部屋の管理が行えます。",
+                            nextPageId = R.id.action_mainMenuFragment_to_roomListFragment
+                        )
+                    }
                 }
             }
         }
@@ -37,13 +49,12 @@ class MainMenuFragment : Fragment() {
 
     @Composable
     fun MenuCard(
-        title: String = "センサーの管理",
-        subTitle: String = "センサーの追加・削除、情報の更新が行えます",
+        title: String,
+        subTitle: String = "",
         nextPageId: Int = -1
     ) {
         Card(
             modifier = Modifier
-                .padding(16.dp)
                 .wrapContentSize()
                 .clickable { if (nextPageId > 0) findNavController().navigate(nextPageId) },
             elevation = 4.dp,

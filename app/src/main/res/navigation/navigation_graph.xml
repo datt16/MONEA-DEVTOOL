@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_MainMenu_to_SensorList"
             app:destination="@id/sensorListFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_roomListFragment"
+            app:destination="@id/roomListFragment" />
     </fragment>
 
     <fragment
@@ -60,6 +63,10 @@
             android:id="@+id/action_SensorList_to_Update"
             app:destination="@id/sensorUpdateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/roomListFragment"
+        android:name="io.github.datt16.monea_devtool.ui.RoomListFragment"
+        android:label="RoomListFragment" />
 
 
 </navigation>

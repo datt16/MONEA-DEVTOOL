@@ -38,14 +38,17 @@ class RoomDataRepositoryImpl constructor(
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val value: List<Pair<String, RoomData>>? =
-                    snapshot.getValue<Map<String, RoomData>>()?.toList()
+                Log.d("Repo[Sensor]", "remote data changed...")
+                val value = snapshot.getValue<Map<String, RoomData>>()
+
+                // 後で変更される可能性があるため、List型の代わりにMutableList型を使用
+                val rooms: MutableList<RoomData> = mutableListOf()
                 value?.map {
-                    Log.d("RoomData/Fetch", "${it.first} : ${it.second.id}")
+                    rooms += it.value
                 }
 
                 // 取得したデータを返す
-                this@callbackFlow.sendBlocking(Result.success(emptyList()))
+                this@callbackFlow.sendBlocking(Result.success(rooms))
             }
         }
 
