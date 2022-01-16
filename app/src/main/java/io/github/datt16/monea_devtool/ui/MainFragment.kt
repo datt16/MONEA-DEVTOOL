@@ -18,17 +18,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import io.github.datt16.monea_devtool.DataSet
 import io.github.datt16.monea_devtool.R
 import io.github.datt16.monea_devtool.Record
-import io.github.datt16.monea_devtool.Records
 import io.github.datt16.monea_devtool.data.RecordRepositoryImpl
 import io.github.datt16.monea_devtool.databinding.FragmentMainBinding
+import io.github.datt16.monea_devtool.models.RecordViewModel
 import kotlinx.coroutines.flow.asStateFlow
 import java.lang.IllegalStateException
 
