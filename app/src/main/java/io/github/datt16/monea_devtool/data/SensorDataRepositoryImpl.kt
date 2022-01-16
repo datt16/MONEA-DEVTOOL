@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.getValue
 import io.github.datt16.monea_devtool.Record
 import io.github.datt16.monea_devtool.Records
 import io.github.datt16.monea_devtool.models.RoomData
+import io.github.datt16.monea_devtool.models.SensorData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.sendBlocking
@@ -19,18 +20,19 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 
 // DBのインスタンスが必要なため、インスタンス化の時に要求
-class RoomDataRepositoryImpl constructor(
+class SensorDataRepositoryImpl constructor(
     private val database: FirebaseDatabase
-) : RealtimeDatabaseRepository<RoomData> {
+) : RealtimeDatabaseRepository<SensorData> {
 
     companion object {
         // RECORD_REFERENCE: RDB上のデータのパス
         // >>> v1/records/sensorId/[センサ名]/records/
-        const val REFERENCE = "v1/rooms/roomId"
+        const val REFERENCE = "v1/sensors"
     }
 
     @ExperimentalCoroutinesApi
-    override fun fetchData() = callbackFlow<Result<List<RoomData>>> {
+    override fun fetchData() = callbackFlow<Result<List<SensorData>>> {
+
 
         val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -38,14 +40,18 @@ class RoomDataRepositoryImpl constructor(
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val value: List<Pair<String, RoomData>>? =
-                    snapshot.getValue<Map<String, RoomData>>()?.toList()
+                Log.d("SensorData/Fetch", "data changed.")
+                val value =
+                    snapshot.getValue<Map<String, SensorData>>()
+                Log.d("SensorData/Fetch", value.toString())
+
+                val sensors: MutableList<SensorData> = mutableListOf()
                 value?.map {
-                    Log.d("RoomData/Fetch", "${it.first} : ${it.second.id}")
+                    sensors += it.value
                 }
 
                 // 取得したデータを返す
-                this@callbackFlow.sendBlocking(Result.success(emptyList()))
+                this@callbackFlow.sendBlocking(Result.success(sensors))
             }
         }
 
