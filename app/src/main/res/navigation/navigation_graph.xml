@@ -43,7 +43,15 @@
     <fragment
         android:id="@+id/sensorUpdateFragment"
         android:name="io.github.datt16.monea_devtool.ui.SensorUpdateFragment"
-        android:label="SensorUpdateFragment" />
+        android:label="SensorUpdateFragment" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="HANDSON"/>
+        <action
+            android:id="@+id/action_sensor_update_done"
+            app:destination="@id/sensorListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sensorListFragment"
         android:name="io.github.datt16.monea_devtool.ui.SensorListFragment"

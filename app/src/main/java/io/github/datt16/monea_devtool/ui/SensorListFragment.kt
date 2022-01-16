@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,6 +36,9 @@ import java.lang.IllegalStateException
 class SensorListFragment : Fragment() {
 
     private val database = Firebase.database
+    private val model: SensorViewModel by activityViewModels{SensorViewModeFactory(
+        SensorDataRepositoryImpl(database)
+    )}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,9 +57,7 @@ class SensorListFragment : Fragment() {
 
     @Composable
     fun SensorListView(
-        sensorViewModel: SensorViewModel = viewModel(
-            factory = SensorViewModeFactory(SensorDataRepositoryImpl(database))
-        )
+        sensorViewModel: SensorViewModel = model,
     ) {
         val sensors = sensorViewModel.sensorDataStateFlow.asStateFlow().collectAsState()
 
@@ -69,19 +71,18 @@ class SensorListFragment : Fragment() {
                 }
             }
         }
-
     }
 
     @Composable
     fun SensorItemCard(
         sensor: SensorData,
-        info1: String = "4J教室",
-        info2: String = "",
     ) {
+        val action = SensorListFragmentDirections.actionSensorListToUpdate(sensor.id)
+
         Card(
             modifier = Modifier
                 .wrapContentSize()
-                .clickable { findNavController().navigate(R.id.action_SensorList_to_Update) },
+                .clickable { findNavController().navigate(action) },
             elevation = 4.dp,
         ) {
             Row(modifier = Modifier.padding(12.dp)) {
@@ -94,18 +95,11 @@ class SensorListFragment : Fragment() {
                     )
                     Row {
                         Text(
-                            text = info1,
-                            style = MaterialTheme.typography.caption,
-                            color = Color.Gray
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = info2,
+                            text = sensor.id,
                             style = MaterialTheme.typography.caption,
                             color = Color.Gray
                         )
                     }
-
                 }
             }
         }
