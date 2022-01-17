@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/sensorUpdateFragment"
-        android:name="io.github.datt16.monea_devtool.ui.SensorUpdateFragment"
+        android:name="io.github.datt16.monea_devtool.ui.UpdateSensorFragment"
         android:label="SensorUpdateFragment" >
         <argument
             android:name="id"
@@ -66,7 +66,22 @@
     <fragment
         android:id="@+id/roomListFragment"
         android:name="io.github.datt16.monea_devtool.ui.RoomListFragment"
-        android:label="RoomListFragment" />
+        android:label="RoomListFragment" >
+        <action
+            android:id="@+id/action_roomListFragment_to_updateRoomFragment"
+            app:destination="@id/updateRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateRoomFragment"
+        android:name="io.github.datt16.monea_devtool.ui.UpdateRoomFragment"
+        android:label="UpdateRoomFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_updateRoomFragment_to_roomListFragment"
+            app:destination="@id/roomListFragment" />
+    </fragment>
 
 
 </navigation>

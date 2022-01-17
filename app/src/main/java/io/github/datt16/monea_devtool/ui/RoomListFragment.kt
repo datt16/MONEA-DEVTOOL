@@ -75,7 +75,7 @@ class RoomListFragment : Fragment() {
     fun SensorItemCard(
         room: RoomData,
     ) {
-        val action = SensorListFragmentDirections.actionSensorListToUpdate(room.id)
+        val action = RoomListFragmentDirections.actionRoomListFragmentToUpdateRoomFragment(room.id)
 
         Card(
             modifier = Modifier
