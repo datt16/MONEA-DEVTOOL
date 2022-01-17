@@ -35,9 +35,9 @@ import io.github.datt16.monea_devtool.models.Status
 import io.github.datt16.monea_devtool.ui.theme.DevToolMaterialTheme
 import kotlinx.coroutines.flow.asStateFlow
 
-class SensorUpdateFragment : Fragment() {
+class UpdateSensorFragment : Fragment() {
 
-    private val args: SensorUpdateFragmentArgs by navArgs()
+    private val args: UpdateSensorFragmentArgs by navArgs()
     private val model: SensorViewModel by activityViewModels()
 
     override fun onCreateView(
